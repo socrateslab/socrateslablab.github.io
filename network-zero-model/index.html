@@ -1,0 +1,1191 @@
+<!doctype html>
+<!--
+  Minimal Mistakes Jekyll Theme 4.6.0 by Michael Rose
+  Copyright 2017 Michael Rose - mademistakes.com | @mmistakes
+  Free for personal and commercial use under the MIT license
+  https://github.com/mmistakes/minimal-mistakes/blob/master/LICENSE.txt
+-->
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+
+<!-- begin SEO -->
+
+
+
+
+
+
+
+
+
+<title>复杂网络零模型构造的方法及应用 - 计算传播网</title>
+
+
+
+
+<meta name="description" content="关心真实网络和该网络随机化零模型比较后的相对值，通过相对结果的统计结果来说明实证网络的性质，此时如何构造出一个合理的复杂网络零模型作为参照物就变得非常重要。">
+
+
+
+
+<meta name="author" content="许小可">
+
+<meta property="og:locale" content="en">
+<meta property="og:site_name" content="计算传播网">
+<meta property="og:title" content="复杂网络零模型构造的方法及应用">
+
+
+  <link rel="canonical" href="https://socrateslab.github.io/forum/network-zero-model/">
+  <meta property="og:url" content="https://socrateslab.github.io/forum/network-zero-model/">
+
+
+
+  <meta property="og:description" content="关心真实网络和该网络随机化零模型比较后的相对值，通过相对结果的统计结果来说明实证网络的性质，此时如何构造出一个合理的复杂网络零模型作为参照物就变得非常重要。">
+
+
+
+  <meta name="twitter:site" content="@ChengJunWang">
+  <meta name="twitter:title" content="复杂网络零模型构造的方法及应用">
+  <meta name="twitter:description" content="关心真实网络和该网络随机化零模型比较后的相对值，通过相对结果的统计结果来说明实证网络的性质，此时如何构造出一个合理的复杂网络零模型作为参照物就变得非常重要。">
+  <meta name="twitter:url" content="https://socrateslab.github.io/network-zero-model/">
+
+  
+    <meta name="twitter:card" content="summary">
+    
+  
+
+  
+    <meta name="twitter:creator" content="@">
+  
+
+
+
+  
+
+  
+
+
+
+  <meta property="og:image" content="https://socrateslab.github.io/forum/assets/images/unsplash-image-8.jpg">
+
+
+
+  <meta property="og:type" content="article">
+  <meta property="article:published_time" content="2015-12-19T00:00:00+00:00">
+
+
+
+
+
+
+
+
+  <script type="application/ld+json">
+    {
+      "@context" : "http://schema.org",
+      "@type" : "Organization",
+      "name" : "计算传播网",
+      "url" : "https://socrateslab.github.io/forum",
+      "sameAs" : null
+    }
+  </script>
+
+
+
+
+
+
+<!-- end SEO -->
+
+
+<link href="https://socrateslab.github.io/forum/feed.xml" type="application/atom+xml" rel="alternate" title="计算传播网 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+</script>
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/forum/assets/css/main.css">
+
+<!--[if lte IE 9]>
+  <style>
+    /* old IE unsupported flexbox fixes */
+    .greedy-nav .site-title {
+      padding-right: 3em;
+    }
+    .greedy-nav button {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+    }
+  </style>
+<![endif]-->
+
+
+
+    <!-- start custom head snippets -->
+<!--mathjax start-->
+    <script type="text/x-mathjax-config">
+     MathJax.Hub.Config({
+       tex2jax: {
+         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+         processEscapes: true
+       },
+      TeX: {
+         equationNumbers: { autoNumber: "AMS" }
+      }
+     });
+    </script>
+    <script type="text/javascript"
+                src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+    </script>
+    <!--mathjax end-->
+
+<!-- insert favicons. use http://realfavicongenerator.net/ -->
+
+<!-- end custom head snippets -->
+
+  </head>
+
+  <body class="layout--single">
+
+    <!--[if lt IE 9]>
+<div class="notice--danger align-center" style="margin: 0;">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div>
+<![endif]-->
+    <div class="masthead">
+  <div class="masthead__inner-wrap">
+    <div class="masthead__menu">
+      <nav id="site-nav" class="greedy-nav">
+        <a class="site-title" href="https://socrateslab.github.io/forum/">计算传播网</a>
+        <ul class="visible-links">
+          
+            
+            <li class="masthead__menu-item"><a href="https://socrateslab.github.io/forum/about/">关于</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://socrateslab.github.io/forum/year-archive/">文章</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://socrateslab.github.io/forum/authors/">作者</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="https://socrateslab.github.io">中心</a></li>
+          
+            
+            <li class="masthead__menu-item"><a href="http://wiki.swarma.net/index.php/Category:%E8%AE%A1%E7%AE%97%E4%BC%A0%E6%92%AD%E5%AD%A6">百科</a></li>
+          
+        </ul>
+        <button><div class="navicon"></div></button>
+        <ul class="hidden-links hidden"></ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+    
+  
+
+
+
+
+
+
+
+
+
+
+
+<div class="page__hero--overlay"
+  style="background-color: #000; background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://socrateslab.github.io/forum/assets/images/unsplash-image-8.jpg');"
+>
+  
+    <div class="wrapper">
+      <h1 class="page__title" itemprop="headline">
+        
+          复杂网络零模型构造的方法及应用
+
+        
+      </h1>
+      
+        <p class="page__lead">关心真实网络和该网络随机化零模型比较后的相对值，通过相对结果的统计结果来说明实证网络的性质，此时如何构造出一个合理的复杂网络零模型作为参照物就变得非常重要。
+</p>
+      
+      
+      
+    </div>
+  
+  
+    <span class="page__hero-caption">Photo credit: <a href="https://unsplash.com"><strong>Unsplash</strong></a>
+</span>
+  
+</div>
+
+
+
+
+
+<div id="main" role="main">
+  
+  <div class="sidebar sticky">
+  
+
+<div itemscope itemtype="http://schema.org/Person">
+
+  
+    <div class="author__avatar">
+      
+        <img src="https://socrateslab.github.io/forum/assets/images/bio-photo.jpg" class="author__avatar" alt="许小可" itemprop="image">
+      
+    </div>
+  
+
+  <div class="author__content">
+    <h3 class="author__name" itemprop="name">许小可</h3>
+    
+      <p class="author__bio" itemprop="description">
+        I ordered what?
+      </p>
+    
+  </div>
+
+  <div class="author__urls-wrapper">
+    <button class="btn btn--inverse">Follow</button>
+    <ul class="author__urls social-icons">
+      
+
+      
+
+      
+        <li>
+          <a href="mailto:">
+            <meta itemprop="email" content="" />
+            <i class="fa fa-fw fa-envelope-square" aria-hidden="true"></i> Email
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://twitter.com/" itemprop="sameAs">
+            <i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter
+          </a>
+        </li>
+      
+
+      
+
+      
+        <li>
+          <a href="https://plus.google.com/+" itemprop="sameAs">
+            <i class="fa fa-fw fa-google-plus-square" aria-hidden="true"></i> Google+
+          </a>
+        </li>
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      <!--
+  <li>
+    <a href="http://link-to-whatever-social-network.com/user/" itemprop="sameAs">
+      <i class="fa fa-fw" aria-hidden="true"></i> Custom Social Profile Link
+    </a>
+  </li>
+-->
+    </ul>
+  </div>
+</div>
+
+  
+  </div>
+
+
+  <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+    <meta itemprop="headline" content="复杂网络零模型构造的方法及应用">
+    <meta itemprop="description" content="关心真实网络和该网络随机化零模型比较后的相对值，通过相对结果的统计结果来说明实证网络的性质，此时如何构造出一个合理的复杂网络零模型作为参照物就变得非常重要。">
+    <meta itemprop="datePublished" content="December 19, 2015">
+    
+
+    <div class="page__inner-wrap">
+      
+
+      <section class="page__content" itemprop="text">
+        <aside class="sidebar__right">
+<nav class="toc">
+    <header><h4 class="nav__title"><i class="fa fa-file-text"></i> Table</h4></header>
+<ul class="toc__menu" id="markdown-toc">
+  <li><a href="#一生成随机网络方法" id="markdown-toc-一生成随机网络方法">一、生成随机网络方法</a>    <ul>
+      <li><a href="#优点和缺点" id="markdown-toc-优点和缺点">优点和缺点</a></li>
+    </ul>
+  </li>
+  <li><a href="#二网络置乱方法" id="markdown-toc-二网络置乱方法">二、网络置乱方法</a></li>
+  <li><a href="#三零模型的意义" id="markdown-toc-三零模型的意义">三、零模型的意义</a></li>
+  <li><a href="#第二章-无权网络零模型的构造及应用" id="markdown-toc-第二章-无权网络零模型的构造及应用">第二章 无权网络零模型的构造及应用</a></li>
+  <li><a href="#22-不同阶数网络零模型的定义" id="markdown-toc-22-不同阶数网络零模型的定义">2.2 不同阶数网络零模型的定义</a></li>
+  <li><a href="#23-基于-er-随机图的-0-阶零模型" id="markdown-toc-23-基于-er-随机图的-0-阶零模型">2.3 基于 ER 随机图的 0 阶零模型</a></li>
+  <li><a href="#24-基于配置模型的零模型" id="markdown-toc-24-基于配置模型的零模型">2.4 基于配置模型的零模型</a>    <ul>
+      <li><a href="#241-基于配置模型的-1-阶零模型" id="markdown-toc-241-基于配置模型的-1-阶零模型">2.4.1 基于配置模型的 1 阶零模型</a></li>
+      <li><a href="#242-基于配置模型的-2-阶零模型" id="markdown-toc-242-基于配置模型的-2-阶零模型">2.4.2 基于配置模型的 2 阶零模型</a></li>
+      <li><a href="#243-基于配置模型的-3-阶零模型" id="markdown-toc-243-基于配置模型的-3-阶零模型">2.4.3 基于配置模型的 3 阶零模型</a></li>
+    </ul>
+  </li>
+  <li><a href="#25-基于随机断边重连的零模型" id="markdown-toc-25-基于随机断边重连的零模型">2.5 基于随机断边重连的零模型</a>    <ul>
+      <li><a href="#251-基于随机断边重连的-0-阶零模型" id="markdown-toc-251-基于随机断边重连的-0-阶零模型">2.5.1 基于随机断边重连的 0 阶零模型</a></li>
+      <li><a href="#252-基于随机断边重连的-1-阶零模型" id="markdown-toc-252-基于随机断边重连的-1-阶零模型">2.5.2 基于随机断边重连的 1 阶零模型</a></li>
+      <li><a href="#253-基于随机断边重连的-2-阶零模型" id="markdown-toc-253-基于随机断边重连的-2-阶零模型">2.5.3 基于随机断边重连的 2 阶零模型</a></li>
+      <li><a href="#253-基于随机断边重连的-25-阶零模型" id="markdown-toc-253-基于随机断边重连的-25-阶零模型">2.5.3 基于随机断边重连的 2.5 阶零模型</a></li>
+      <li><a href="#下载附件初稿和代码" id="markdown-toc-下载附件初稿和代码">下载附件（初稿和代码）</a></li>
+    </ul>
+  </li>
+  <li><a href="#参考文献" id="markdown-toc-参考文献">参考文献</a></li>
+</ul>
+
+  </nav>
+</aside>
+
+<p><em>复杂网络</em>是指由数量巨大的节点在一定时间尺度上关联影响共同构成的<code>复杂系统</code>，网络科学的研究中重点关注复杂网络中存在的<code>非平凡性质</code>以及这些特殊性质的产生<code>机理</code>。在实证网络的研究中，研究者一般会使用多种<code>统计量</code>来刻画复杂网络的性质，如描述静态无权网络的常见统计量有平均度、度分布、匹配系数、聚类系数和平均路径长度等。</p>
+
+<p>鉴于各种统计量的绝对数值往往是<code>无量纲</code>的，而且由于不同复杂网络的规模大小各异、结构千差万别，仅仅计算出上述统计量的绝对数值来判断网络的宏观特性不仅定量分析上不够精确，有些时候甚至连定性分析的结果都不准确。因此在研究中学者们往往不仅关注实际网络统计量的绝对值，更关心真实网络和该网络随机化零模型比较后的相对值，通过相对结果的统计结果来说明实证网络的性质，此时如何构造出一个合理的复杂网络零模型作为参照物就变得非常重要。</p>
+
+<h2 id="一生成随机网络方法">一、生成随机网络方法</h2>
+
+<p>通常，我们把与一个实际网络<code>具有某些相同性质的随机网络</code>称为该实际网络的随机化副本，这类随机化网络在统计学上被称为<code>零模型</code>。一个好的复杂网络零模型能为原始网络提供一个准确的参照，结合统计量指标就可以准确描述出实际复杂网络的非平凡特性。复杂网络的零模型构造方式主要有两种：网络模型方法和随机置乱的方法。</p>
+
+<p>网络模型的方法是:</p>
+<ul>
+<li>
+<p>首先计算实证网络的一些重要统计量</p>
+</li>
+<li>
+<p>然后根据这些统计量的数值来推断网络的形成机制</p>
+</li>
+<li>
+<p>最终通过模拟网络的形成机制来生成和原始网络某些统计特征类似的新网络，即原始网络的零模型。</p>
+</li>
+</ul>
+
+<h3 id="优点和缺点">优点和缺点</h3>
+<p>网络模型方法的<code>优点</code>是可以从无到有生成零模型网络，而且生成网络的规模等参数可以人为控制，具有很好的灵活性。</p>
+
+<p>网络模型方法的<code>缺点</code>是一方面建模方法对真实网络生成机制的推断不一定是正确的，使用模型从无到有生成实际网络零模型的时候往往只能保持少量特征和实际网络相似，而在更多的特征上两者还是有很大差异，既能保持形式简洁又能深刻描述复杂系统内在的物理机制的网络模型很难生成。另一方面，基于模型方法来生成的零模型往往对于真实网络的某些统计特征的模拟是<code>有偏的</code>，即基于零模型生成的多个网络的某个统计量往往都大于（或小于）实际网络，我们在使用的时候无法判断出模型的这种有偏特性会对真实网络其他特性有哪些方面的影响。</p>
+
+<h2 id="二网络置乱方法">二、网络置乱方法</h2>
+
+<p>基于置乱方式产生的复杂网络零模型不是一个从无到有生成新网络的过程，这种方法主要是将实际网络的数据进行随机化后得到的。置乱算法既可以将网络上的连接关系进行<em>随机化断边重连</em>，也可以在保持原有连接的前提下<em>随机化某些因素</em>。这种由原始数据直接生成新数据的思想不仅在复杂网络领域得到广泛应用，也是<em>时间序列</em>处理领域的常用方法。</p>
+
+<p>基于置乱方式产生的复杂网络零模型数据通过使用不同的约束条件，可以保持或破坏实际网络数据多尺度的时变和拓扑性质。置乱算法不仅仅能够保持和破坏网络的平均度、度分布、匹配特性、聚类特性等，还可以任意地保持和破坏网络的权重分布和时变特性。</p>
+
+<blockquote>
+<p>置乱算法不但能让研究者细致分析网络的不同特性，而且这种随机化方法不需要高深的理论，很容易理解和编程实现。因此它为实际网络提供了一套从“形似”到“形神兼备”的随机化参照物，在有些问题的研究中，它甚至是唯一的零模型构造方法，尤其在社交网络和计算传播学研究中，由置乱算法产生的随机模型在众多研究中有实际应用。</p>
+</blockquote>
+
+<h2 id="三零模型的意义">三、零模型的意义</h2>
+
+<p>网络零模型研究的意义主要有以下两点：一是可以检测的非平凡性质，二是对这些性质产生的原因进行探究。一个好的网络零模型能为原始网络提供一个准确的基准，结合统计量指标就可以准确描述出实际复杂网络的非平凡特性以及这种非平凡特性的来源。若实证网络和最简单的零模型在性质上没有差别，那么说明该网络没有非平凡性质。若已知实证网络和最简单的零模型在性质上具有统计意义上的差别，则说明该网络具有非平凡性质。对于这样的网络，我们下一步应该检测这种非平凡性质的来源。这时候，我们应该从简单到复杂，从低到高逐渐来提高零模型和实证网络的吻合程度。</p>
+
+<p>传统意义上的零模型是在缺乏实证参照时构建出来的参照对象，它应该尽量不包含我们关心的机制或变量而保留其他特征，在构造复杂网络零模型时我们也采用了相似的方式。比如，在研究网络同配性质时，应该尽可能在保留原网络低阶性质基础上充分随机化，这样才能看出实际网络是否有足够的异于随机网络的同配性质。如果随机化不够，零模型带有过多的实际网络的同配特性，则由于无法在统计上区分两者而导致否定实际网络的同配性。</p>
+
+<p>鉴于置乱算法产生复杂网络零模型的重要性，在本书中我们将整理和总结无权网络、符号网络、加权网络、时变网络、双层网络和空间网络上经常使用的各种置乱算法，同时简单介绍了这些算法在社交网络和计算传播学的实际应用。通过对这些置乱算法的分析和比较，有助于社交网络以及传播学领域的学者正确使用置乱算法来产生社交网络零模型，在参考零模型的前提下合理计算各种统计量的相对值，进一步深化我们对各种信息扩散系统的理解和利用。</p>
+
+<h2 id="第二章-无权网络零模型的构造及应用">第二章 无权网络零模型的构造及应用</h2>
+<p>主要介绍无权网络零模型的分类以及零模型的产生过程。无权无向网络的零模型产生方法有两种：</p>
+<ul>
+<li>
+<p>一种是基于网络模型的方法，基于网络模型生成的零模型网络可分为ER随机图和配置模型两种方式，其中ER随机图一般只能产生0阶零模型，而配置模型可产生1阶、2阶或更高阶零模型。</p>
+</li>
+<li>
+<p>另一种是将原始网络进行置乱(断边重连)的方法，原始网络断边重连既可以进行随机断边重连，也可以使用有倾向性的断边重连。随机断边重连可以产生0、1、2、2.5阶网络零模型，其中1阶零模型可以用来检测原始网络的度匹配特性。</p>
+</li>
+</ul>
+<p>有倾向性断边重连有两方面的应用：</p>
+<ul>
+<li>
+<p>一是可用来检测网络是否具有富人俱乐部特性，</p>
+</li>
+<li>
+<p>二是可以用来检测网络的匹配特性。</p>
+</li>
+</ul>
+
+<p>无权有向网络的零模型只介绍一种构造方式，即将原始网络断边重连，一般使用该方法来产生的1阶零模型，适用于检测有向网络中节点与节点之间的出入度匹配特性。</p>
+
+<h2 id="22-不同阶数网络零模型的定义">2.2 不同阶数网络零模型的定义</h2>
+
+<p>使用网络零模型主要的目的是检测实证网络的非平凡特性，这就需要从粗糙到精确逐步逼近原始网络的性质。Mahadeven 等为了逐步逼近实证网络，根据原始网络的基本特性，可将网络中的基本组成单元分成不同的小模块如图 2-3(a)所示，最左端为原始网络，右端从右到左依次介绍了产生不同阶数的零模型所需要原始网络的基本性质，从而引入了不同阶数网络零模型的概念[1, 2]，如图 2-3(b)所示。不同阶数网络零模型之间并不是独立的，按照约束条件从少到多，存在一种包含关系，即 ，任何一个 n阶零模型都会包含(n-1)阶零模型的性质<a href="http://computational-communication.com/wp-content/uploads/2015/12/null_model_program.zip">3</a>。</p>
+
+<p>0 阶零模型是最简单也是最随机化的网络零模型，只需要与原始网络具有相同的节点数和平均度。平均度k是指原始网络中所有节点的度的平均值，设m为原始网络连边的数量，n为原始网络节点的数量，则k = 2m/n 。</p>
+
+<p>1 阶零模型与原始网络不但具有相同的节点数、相同的平均度，更重要的是具有相同的节点度分布p(k)，度分布是指原始网络中节点度的概率或数目的分布。若n(k)为原始网络中度为k的节点的数目，则度分布为p(k)= n(k)/n 。1 阶零模型主要是保证与原始网络具有相同的节点度分布。</p>
+
+<p>2 阶零模型与原始网络具有相同的联合度分布$p(k_{1}, k_{2})$ ,联合度分布是指每条边两端连接节点的度值数目(概率)。若$m(k_{1}, k_{2}$为度为$k_{1}$和$k_{2}$的节点之间连边的总数，则$ p(k_{1}, k_{2}) = \frac{m(k_{1}, k_{2}) \mu(k_{1}, k_{2}) }{2m} $ 其中，若$k_{1} = k_{2}$,则$\mu(k_{1}, k_{2}) = 2$, 否则$\mu(k_{1}, k_{2})=1$。</p>
+
+<p>2.25 阶零模型是根据原始网络中的联合度分布和平均聚类系数这两个物理属性构造的，要求与原始网络具有相同的联合度分布$p(k_{1}, k_{2})$和平均聚类系数$\bar{C}$。假设网络中的一个节点i有$m_{i}$条边将它和其他节点相连，这$m_{i}$个节点就称为节点i的邻居节点。显然，在这$m_{i}$个节点之间最多可能有$\frac{m_{i}(m_{i} &#8211; 1)}{2}$条边。$m_{i}$个节点之间实际存在的边数$M_{i}$和总的可能边数$\frac{m_{i}(m_{i} &#8211; 1)}{2}$之比就定义为节点i的聚类系数$C_{i}$，即 $\frac{2M_{i}}{m_{i}(m_{i} &#8211; 1)}$。平均聚类系数$\bar{C}$定义为在原始网络中，所有节点的聚类系数的平均值，即$\bar{C} = \frac{1}{N}\sum_{i}^{}C_{i}$</p>
+
+<p>2.5 阶零模型与原始网络具有相同的联合度分布$p(k_{1}, k_{2})$和度相关的平均聚类系数$\bar{C}(k)$，即$\bar{C(k)} = \frac{1}{N_{i}}\sum_{i\in N_{k}}^{}C_{i}$。其中，$N_{k}$表示度为k的节点的集合。</p>
+
+<p>3 阶零模型与原始网络具有相同的联合边度分布$p(k_1, k_2, k_3)$ ，联合边度分布考虑到三个节点之间的相互连接性，主要有两种情况，一种是开三角形，即 3 个节点用 2 条边来连接称为$p_{\Lambda}(k_1, k_2, k_3)$;另一种是闭三角形如图 2-4(b)所示，3 个节点形成一个环称为$p_{\Delta}(k_1, k_2, k_3)$ 。与原始网络具有相同的联合边度分布$p(k_1, k_2, k_3)$，就要求零模型网络和原始网络具有相同的开三角形和闭三角形分布。</p>
+
+<p>随着生成零模型的约束条件逐步增加，构造的高阶零模型比低阶模型更接近于原始网络，因此精确的 3 阶零模型比 0，1，2，2.25 和 2.5 阶零模型更接近于原始网络。以此类推下去，理论上我们还可以定义更高阶的零模型<a href="http://computational-communication.com/wp-content/uploads/2015/12/Snip20151220_27.png">3</a>。随着约束条件越多，可以被置乱的连边数也就越少，生成的网络零模型越接近于原始网络，但是这样进行连边置乱也就越困难。对于 3 阶网络零模型，该零模型受到的约束条件已经很多，很多情况下我们不能在一个有限的计算时间内生成相应的零模型，因此不具备实用性，2.5 阶零模型是现在能够实现的最高阶的实用零模型[1, 2]。因此，在本文中我们重点介绍可以将原始网络进行较高程度随机化的 0-2.5 阶网络 零模型。</p>
+<blockquote>
+<p>构造静态无权网络零模型的方法主要有基于模型的 ER 随机图、配置模型和基于随机断边重连这 3 种。</p>
+</blockquote>
+
+<h2 id="23-基于-er-随机图的-0-阶零模型">2.3 基于 ER 随机图的 0 阶零模型</h2>
+<p>此外，我们也可以采用随机断边重连的方式产生 0 阶零模型，但是无论采用哪种方式，0 阶零模型只和原始网络具有相同的节点数和边数，生成的网络结构随机性很强，性质和原始网络相差较大。ER 随机图的生成过程可以使用基于 Python 语言的 NetworkX 包来实现，具体语句为：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">networks</span> <span class="k">as</span> <span class="n">nx</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">p</span> <span class="o">=</span> <span class="mf">0.2</span>
+<span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">random_graphs</span><span class="p">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>   
+</code></pre></div></div>
+<p>其中，输入的参数n为原始网络的节点个数, 指定生成边的概率p ， p值应为原始网络的连边数m与节点数n平方的比值，即$p = \frac{2m}{n^2}$ 。因此，给定一个网络G0，通过ER随机图的方法构造0阶零模型的方法如下：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">ER_model</span><span class="p">(</span><span class="n">G0</span><span class="p">):</span>
+    <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">.</span><span class="n">nodes</span><span class="p">())</span>
+    <span class="n">m</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span>
+    <span class="n">p</span><span class="o">=</span><span class="mf">2.0</span><span class="o">*</span><span class="n">m</span><span class="o">/</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="n">n</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">random_graphs</span><span class="p">.</span><span class="n">erdos_renyi_graph</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="n">directed</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">G</span>
+</code></pre></div></div>
+<h2 id="24-基于配置模型的零模型">2.4 基于配置模型的零模型</h2>
+
+<blockquote>
+<p>配置模型是在 ER随机图的基础之上进行扩展产生的一种广义随机图。由配置模型生成零模型的基本思想是：根据产生不同阶数零模型所需要的基本特性，将原始网络拆成相应的含有某种特性的基本子图，并通过不同的约束条件将基本子图重新随机组合到一起的过程。</p>
+</blockquote>
+<p>为了比 ER 随机图更精确地拟合原始网络，构造出与真实网络度分布相同的零模型，Molloy等提出了广义随机图，也就是我们熟知的配置模型。</p>
+<ul>
+<li>
+<p>1 阶配置模型中通过给定原始网络的度序列来构造零模型网络</p>
+</li>
+<li>
+<p>2 阶配置模型通过给定原始网络中的联合度分布序列来构造零模型网络</p>
+</li>
+<li>
+<p>3 阶配置模型更具体的给定了每个节点中边角的分布情况，即原始网络中的“线”和“角”序列来构造零模型网络</p>
+</li>
+</ul>
+
+<h3 id="241-基于配置模型的-1-阶零模型">2.4.1 基于配置模型的 1 阶零模型</h3>
+
+<p>NetworkX 算法包中已经实现了网络的 1 阶配置模型，假定原始网络为 G，应首先调G0.degree().values()方法得到原始网络的度序列，然后根据该度序列生成配置网络图 G。具体代码为：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">network</span> <span class="k">as</span> <span class="n">nx</span>
+<span class="k">def</span> <span class="nf">config_model</span><span class="p">(</span><span class="n">G0</span><span class="p">):</span>
+    <span class="n">degree_seq</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">G0</span><span class="p">.</span><span class="n">degree</span><span class="p">().</span><span class="n">values</span><span class="p">())</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">configuration_model</span><span class="p">(</span><span class="n">degree_seq</span><span class="p">)</span>
+<span class="n">G1</span> <span class="o">=</span> <span class="n">config_model</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+</code></pre></div></div>
+
+<h3 id="242-基于配置模型的-2-阶零模型">2.4.2 基于配置模型的 2 阶零模型</h3>
+<p>2 阶零模型网络要求与原始网络具有相同的联合度分布，使用配置模型也可以生成原始网络的 2 阶零模型。假定原始网络有m条边，首先我们将该网络拆成m个子图，每个子图为两个节点{i,j}配对的形式。然后随机选取一个子图，并将子图中度值为$k_i$的节点i视为起始节点。随机的在网络中挑选$k_i &#8211; 1$个子图，并且每个子图中至少含有一个度值为$k_i$的节点，最后将这$k_i$个节点重新组合成一个新的度为$k_i$的节点。持续随机选取一个分支节点作为起始节点重复上述过程，直到将所有的子图都重新组合就完成了 2 阶零模型的生成。</p>
+
+<h3 id="243-基于配置模型的-3-阶零模型">2.4.3 基于配置模型的 3 阶零模型</h3>
+<p>许多实际网络都具有明显的聚类特性，而实际网络的高聚类性却没有在低阶配置模型，如 0 阶、1 阶和 2 阶模型中体现出来。为了解决这一缺陷，Newman 等提出了能够保持实际网络聚类特性的零模型，这也就是下面要介绍的 3 阶配置模型[13]。</p>
+<p>在 3 阶零模型中将原始网络分成“线”和“角”两种基本元素，这种形式的拆分保证了网络中各节点的聚类系数不变。我们定义$s_i$为与节点i相连的不构成三角形的单条边的数目，$t_i$为节点i所参与的三角形中角的数目。因此，对于每个节点都可以得到它的联合“线”和“角”序列，即${s_i, t_i}$，每一个线角序列也可以称为一个线角子图。在给定网络联合线角序列的前提下，可以随机选取一对线连接它们形成一条连边，也可以随机选择不是同一节点的三个角连接它们形成完整的三角形。上述线和角聚合的过程可以同时进行，也可以随机进行，重复聚合过程用完所有的线角子图后就生成了 3 阶零模型。</p>
+
+<h2 id="25-基于随机断边重连的零模型">2.5 基于随机断边重连的零模型</h2>
+<p>用 ER 随机图或配置模型的方法构造的零模型是从无到有生成新网络的过程，而用置乱算法构造的零模型则是将原始网络随机化的过程[16, 17]。</p>
+
+<h3 id="251-基于随机断边重连的-0-阶零模型">2.5.1 基于随机断边重连的 0 阶零模型</h3>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">random_0k</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>    <span class="c1">#基于随机断边重连的0阶零模型
+</span>    <span class="n">G</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>      
+    <span class="k">if</span> <span class="n">nswap</span><span class="o">&lt;</span><span class="n">max_tries</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Number of swaps &lt; number of tries allowed."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph has less than three nodes."</span><span class="p">)</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">swapcount</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">swapcount</span> <span class="o">&lt;</span> <span class="n">nswap</span><span class="p">:</span>
+        <span class="n">u</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span>      <span class="c1">#随机选网络中的一条要断开的边
+</span>        <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">nodes</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>    <span class="c1">#随机找两个不相连的节点
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">():</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>              <span class="c1">#断旧边
+</span>            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>                 <span class="c1">#连新边
+</span>            <span class="n">swapcount</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_tries</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="s">'Maximum number of swap attempts (%s) exceeded '</span><span class="o">%</span><span class="n">n</span> <span class="o">+</span>
+            <span class="s">'before desired swaps achieved (%s).'</span><span class="o">%</span><span class="n">nswap</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">break</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">G</span>
+
+<span class="k">def</span> <span class="nf">random_0kc</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span> <span class="c1">#保持连通性的情况下基于随机断边重连的0阶零模型
+</span>    <span class="s">"""
+    在random_0k()的基础上增加连通性判断，若置乱后的网络不保持连通性则撤销该置乱操作
+    注：G0为连通网络
+    """</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">nswap</span><span class="o">&lt;</span><span class="n">max_tries</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Number of swaps &lt; number of tries allowed."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">nx</span><span class="p">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph not connected"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph has less than three nodes."</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">swapcount</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">swapcount</span> <span class="o">&lt;</span> <span class="n">nswap</span><span class="p">:</span>
+        <span class="n">swapped</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">u</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span>      <span class="c1">#随机选网络中的一条要断开的边        
+</span>        <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">nodes</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>    <span class="c1">#随机找两个不相连的节点
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">()</span> <span class="ow">and</span> <span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">)</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">():</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>              <span class="c1">#断旧边
+</span>            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>                 <span class="c1">#连新边
+</span>            <span class="n">swapped</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+            <span class="n">swapcount</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nx</span><span class="p">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>  
+            <span class="k">while</span> <span class="n">swapped</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">swapped</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>          <span class="c1">#撤销连新边操作
+</span>                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>             <span class="c1">#撤销断边操作
+</span>                <span class="n">swapcount</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_tries</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="s">'Maximum number of swap attempts (%s) exceeded '</span><span class="o">%</span><span class="n">n</span> <span class="o">+</span>
+            <span class="s">'before desired swaps achieved (%s).'</span><span class="o">%</span><span class="n">nswap</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">break</span>
+        <span class="n">n</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">G</span>
+</code></pre></div></div>
+
+<h3 id="252-基于随机断边重连的-1-阶零模型">2.5.2 基于随机断边重连的 1 阶零模型</h3>
+<p>由于在 networkX 算法包中已经编写了 nx.double_edge_swap()方法完成从原始网络中任选两条边进行断边重连，因此基于随机断边重连生成 1 阶网络零模型比较容易，具体程序如下所示：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">double_edge_swap</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="p">,</span> <span class="n">max_tries</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">random_1k</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>  <span class="c1">#随机断边重连的1阶零模型
+</span>    <span class="s">"""
+    随机取两条边 u-v 和 x-y, 且节点u和x,v和y无连边, 则断边重连
+    """</span>
+    <span class="k">if</span> <span class="n">nswap</span><span class="o">&lt;</span><span class="n">max_tries</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Number of swaps &lt; number of tries allowed."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph has less than four nodes."</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">swapcount</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">keys</span><span class="p">,</span><span class="n">degrees</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">().</span><span class="n">items</span><span class="p">())</span>
+    <span class="n">cdf</span><span class="o">=</span><span class="n">nx</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">cumulative_distribution</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>  
+    <span class="k">while</span> <span class="n">swapcount</span> <span class="o">&lt;</span> <span class="n">nswap</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">ui</span><span class="p">,</span><span class="n">xi</span><span class="p">)</span><span class="o">=</span><span class="n">nx</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">discrete_sequence</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">cdistribution</span><span class="o">=</span><span class="n">cdf</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ui</span><span class="o">==</span><span class="n">xi</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">u</span><span class="o">=</span><span class="n">keys</span><span class="p">[</span><span class="n">ui</span><span class="p">]</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">keys</span><span class="p">[</span><span class="n">xi</span><span class="p">]</span>
+        <span class="n">v</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">v</span><span class="o">==</span><span class="n">y</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="ow">and</span> <span class="p">((</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">()):</span>  
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>                           <span class="c1">#断旧边
+</span>            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>                        <span class="c1">#连新边
+</span>            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">swapcount</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_tries</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="s">'Maximum number of swap attempts (%s) exceeded '</span><span class="o">%</span><span class="n">n</span> <span class="o">+</span>
+            <span class="s">'before desired swaps achieved (%s).'</span><span class="o">%</span><span class="n">nswap</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">break</span>
+        <span class="n">n</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">G</span>
+
+<span class="k">def</span> <span class="nf">random_1kc</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>     <span class="c1">#保持连通性下随机断边重连的1阶零模型
+</span>    <span class="s">"""
+    在random_1k()的基础上增加连通性判断，若置乱后的网络不保持连通性则撤销该置乱操作
+    注：G0为连通网络
+    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">nx</span><span class="p">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G0</span><span class="p">):</span>
+       <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph not connected"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph has less than four nodes."</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">swapcount</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">keys</span><span class="p">,</span><span class="n">degrees</span><span class="o">=</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">().</span><span class="n">items</span><span class="p">())</span>
+    <span class="n">cdf</span><span class="o">=</span><span class="n">nx</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">cumulative_distribution</span><span class="p">(</span><span class="n">degrees</span><span class="p">)</span>  
+    <span class="k">while</span> <span class="n">swapcount</span> <span class="o">&lt;</span> <span class="n">nswap</span><span class="p">:</span>
+        <span class="n">swapped</span><span class="o">=</span><span class="p">[]</span>
+        <span class="p">(</span><span class="n">ui</span><span class="p">,</span><span class="n">xi</span><span class="p">)</span><span class="o">=</span><span class="n">nx</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">discrete_sequence</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">cdistribution</span><span class="o">=</span><span class="n">cdf</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">ui</span><span class="o">==</span><span class="n">xi</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">u</span><span class="o">=</span><span class="n">keys</span><span class="p">[</span><span class="n">ui</span><span class="p">]</span>
+        <span class="n">x</span><span class="o">=</span><span class="n">keys</span><span class="p">[</span><span class="n">xi</span><span class="p">]</span>
+        <span class="n">v</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">v</span><span class="o">==</span><span class="n">y</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="ow">and</span> <span class="p">((</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">()):</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>         
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>      
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">swapped</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+            <span class="n">swapcount</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nx</span><span class="p">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>      
+            <span class="k">while</span> <span class="n">swapped</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">swapped</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>         <span class="c1">#撤销断边操作
+</span>                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>      <span class="c1">#撤销连新边操作
+</span>                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">swapcount</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_tries</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="s">'Maximum number of swap attempts (%s) exceeded '</span><span class="o">%</span><span class="n">n</span> <span class="o">+</span>
+            <span class="s">'before desired swaps achieved (%s).'</span><span class="o">%</span><span class="n">nswap</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">break</span>
+        <span class="n">n</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">G</span>
+</code></pre></div></div>
+
+<h3 id="253-基于随机断边重连的-2-阶零模型">2.5.3 基于随机断边重连的 2 阶零模型</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">random_2k</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="s">"""
+    2阶置乱是在1阶置乱的基础上，增加约束条件：
+    要求断开的边u-v和新连的边u-y中v,y度相同
+    """</span>
+    <span class="k">if</span> <span class="n">nswap</span><span class="o">&lt;</span><span class="n">max_tries</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Number of swaps &lt; number of tries allowed."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph has less than four nodes."</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">swapcount</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">swapcount</span> <span class="o">&lt;</span> <span class="n">nswap</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">nodes</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>     <span class="c1">#随机找两个不相连的点
+</span>        <span class="n">v</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">!=</span><span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">==</span><span class="n">y</span><span class="p">:</span>
+            <span class="k">continue</span>                        <span class="c1">#若节点v,y度不相同，重新选择
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="ow">and</span> <span class="p">((</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">()):</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">swapcount</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_tries</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="s">'Maximum number of swap attempts (%s) exceeded '</span><span class="o">%</span><span class="n">n</span> <span class="o">+</span>
+            <span class="s">'before desired swaps achieved (%s).'</span><span class="o">%</span><span class="n">nswap</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">break</span>
+        <span class="n">n</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">G</span>
+
+<span class="k">def</span> <span class="nf">random_2kc</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="s">"""
+    在random_2k()的基础上增加连通性判断，若置乱后的网络不保持连通性则撤销该置乱操作
+    注：G0为连通网络
+    """</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">nx</span><span class="p">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+       <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph not connected"</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph has less than four nodes."</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">swapcount</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">swapcount</span> <span class="o">&lt;</span> <span class="n">nswap</span><span class="p">:</span>
+        <span class="n">swapped</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">nodes</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>    <span class="c1">#随机找两个不相连的点
+</span>        <span class="n">v</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">!=</span><span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">==</span><span class="n">y</span><span class="p">:</span>
+            <span class="k">continue</span>                        <span class="c1">#若节点v,y度不相同，重新选择
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="ow">and</span> <span class="p">((</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">()):</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">swapped</span><span class="p">.</span><span class="n">append</span><span class="p">((</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+            <span class="n">swapcount</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">nx</span><span class="p">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+            <span class="k">while</span> <span class="n">swapped</span><span class="p">:</span>
+                <span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">swapped</span><span class="p">.</span><span class="n">pop</span><span class="p">()</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">swapcount</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_tries</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="s">'Maximum number of swap attempts (%s) exceeded '</span><span class="o">%</span><span class="n">n</span> <span class="o">+</span>
+            <span class="s">'before desired swaps achieved (%s).'</span><span class="o">%</span><span class="n">nswap</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">break</span>
+        <span class="n">n</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">G</span>
+</code></pre></div></div>
+
+<h3 id="253-基于随机断边重连的-25-阶零模型">2.5.3 基于随机断边重连的 2.5 阶零模型</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="nf">random_25k</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="s">"""
+    在2阶基础上增加度度相关的聚类系数的判断，若置乱前后值不同，则撤销此次置乱
+    """</span>
+    <span class="k">if</span> <span class="n">nswap</span><span class="o">&lt;</span><span class="n">max_tries</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Number of swaps &lt; number of tries allowed."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph has less than four nodes."</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">G0</span><span class="p">.</span><span class="n">degree</span><span class="p">().</span><span class="n">items</span><span class="p">())</span>  <span class="c1">#(度,节点)组成的列表
+</span>    <span class="n">D</span> <span class="o">=</span> <span class="n">dict_degree_nodeslist</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">swapcount</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">swapcount</span> <span class="o">&lt;</span> <span class="n">nswap</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">nodes</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>    <span class="c1">#随机找两个不相连的点
+</span>        <span class="n">v</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+
+        <span class="k">if</span> <span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">!=</span><span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">==</span><span class="n">y</span><span class="p">:</span>
+            <span class="k">continue</span>    <span class="c1"># 若节点v,y度不相同，重新选择
+</span>        <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="ow">and</span> <span class="p">((</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">()):</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">swapcount</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">)):</span>
+            <span class="n">avcG0</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">average_clustering</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="n">D</span><span class="p">.</span><span class="n">values</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">count_zeros</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">avcG</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">average_clustering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="n">D</span><span class="p">.</span><span class="n">values</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">count_zeros</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">avcG0</span> <span class="o">!=</span> <span class="n">avcG</span><span class="p">:</span>   <span class="c1">#若置乱前后度相关的聚类系数不同，则撤销此次置乱操作
+</span>                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">swapcount</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_tries</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="s">'Maximum number of swap attempts (%s) exceeded '</span><span class="o">%</span><span class="n">n</span> <span class="o">+</span>
+            <span class="s">'before desired swaps achieved (%s).'</span><span class="o">%</span><span class="n">nswap</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">break</span>
+        <span class="n">n</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="k">return</span> <span class="n">G</span>
+
+<span class="k">def</span> <span class="nf">random_25kc</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nswap</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_tries</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+    <span class="s">"""
+    只判断四个节点及邻居节点度相关的聚类系数
+    """</span>
+    <span class="k">if</span> <span class="n">nswap</span><span class="o">&lt;</span><span class="n">max_tries</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Number of swaps &lt; number of tries allowed."</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">nx</span><span class="p">.</span><span class="n">NetworkXError</span><span class="p">(</span><span class="s">"Graph has less than four nodes."</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">copy</span><span class="p">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">G0</span><span class="p">)</span>
+    <span class="n">n</span><span class="o">=</span><span class="mi">0</span>
+    <span class="n">swapcount</span><span class="o">=</span><span class="mi">0</span>
+    <span class="k">while</span> <span class="n">swapcount</span> <span class="o">&lt;</span> <span class="n">nswap</span><span class="p">:</span>
+        <span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">sample</span><span class="p">(</span><span class="n">G</span><span class="p">.</span><span class="n">nodes</span><span class="p">(),</span><span class="mi">2</span><span class="p">)</span>    
+        <span class="n">v</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">]))</span>
+        <span class="n">y</span><span class="o">=</span><span class="n">random</span><span class="p">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">v</span><span class="p">)</span><span class="o">!=</span><span class="n">G</span><span class="p">.</span><span class="n">degree</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="ow">or</span> <span class="n">v</span><span class="o">==</span><span class="n">y</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">([</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">])</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">:</span>
+            <span class="k">continue</span>                    <span class="c1"># 若节点v,y度不相同，重新选择
+</span>        <span class="n">n</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">y</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">u</span><span class="p">))</span> <span class="ow">and</span> <span class="p">(</span><span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">neighbors</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="ow">and</span> <span class="p">((</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">())</span> <span class="ow">and</span> <span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">G</span><span class="p">.</span><span class="n">edges</span><span class="p">()):</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+            <span class="n">swapcount</span><span class="o">+=</span><span class="mi">1</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">nx</span><span class="p">.</span><span class="n">is_connected</span><span class="p">(</span><span class="n">G</span><span class="p">):</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">swapcount</span> <span class="o">-=</span> <span class="mi">1</span>
+                <span class="k">continue</span>
+            <span class="n">l</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">t</span><span class="p">:(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">G0</span><span class="p">.</span><span class="n">degree</span><span class="p">([</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">]</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">u</span><span class="p">])</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">v</span><span class="p">])</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">x</span><span class="p">])</span><span class="o">+</span><span class="nb">list</span><span class="p">(</span><span class="n">G</span><span class="p">[</span><span class="n">y</span><span class="p">])).</span><span class="n">items</span><span class="p">())</span>  <span class="c1">#(度,节点)组成的列表
+</span>            <span class="n">D</span> <span class="o">=</span> <span class="n">dict_degree_nodeslist</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">)):</span>
+                <span class="n">avcG0</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">average_clustering</span><span class="p">(</span><span class="n">G0</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="n">D</span><span class="p">.</span><span class="n">values</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">count_zeros</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="n">avcG</span> <span class="o">=</span> <span class="n">nx</span><span class="p">.</span><span class="n">average_clustering</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">nodes</span><span class="o">=</span><span class="n">D</span><span class="p">.</span><span class="n">values</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="n">weight</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">count_zeros</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+                <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">avcG0</span> <span class="o">!=</span> <span class="n">avcG</span><span class="p">:</span>   <span class="c1">#若置乱前后度相关的聚类系数不同，则撤销此次置乱操作
+</span>                    <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                    <span class="n">G</span><span class="p">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                    <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                    <span class="n">G</span><span class="p">.</span><span class="n">remove_edge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+                    <span class="n">swapcount</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="k">break</span>    
+        <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="n">max_tries</span><span class="p">:</span>
+            <span class="n">e</span><span class="o">=</span><span class="p">(</span><span class="s">'Maximum number of swap attempts (%s) exceeded '</span><span class="o">%</span><span class="n">n</span> <span class="o">+</span>
+            <span class="s">'before desired swaps achieved (%s).'</span><span class="o">%</span><span class="n">nswap</span><span class="p">)</span>
+            <span class="k">print</span> <span class="n">e</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">G</span>
+</code></pre></div></div>
+
+<h3 id="下载附件初稿和代码">下载附件（初稿和代码）</h3>
+<p>下面是可以下载的内容，可以下载的内容，可以下载的内容《第二章 无权网络零模型的构造及应用》，系本书第二章初稿和各种零模型对应的python代码。初稿和代码是我的两个学生四个多月辛勤努力的成果，限于我这个老师的水平有限，里面还有很多问题，欢迎大家过来拍砖。</p>
+
+<p><a href="http://computational-communication.com/uploads/2015/12/第二章-无权网络零模型的构造及应用_初稿.pdf">附件1. 第二章 无权网络零模型的构造及应用_初稿</a></p>
+<p><a href="http://computational-communication.com/uploads/2015/12/null_model_program.zip">附件2. 本章内容对应的程序代码：null_model_program</a></p>
+
+<h2 id="参考文献">参考文献</h2>
+<p>Orsini C, Dankulov M M, Colomer-de-Simon P, et al. Quantifying randomness in real networks[J]. Nature Communications, 2015,6.</p>
+<p>Molloy M, Reed B. The Size of the Giant Component of a Random Graph with a Given Degree Sequence[J]. Combinatorics, Probability and Computing, 1998,7(03):295-305.</p>
+<p>Molloy M, Reed B. A Critical Point for Random Graphs with a Given Degree Sequence[J].Random Structures and Algorithms, 1995,6(2-3):161-180.</p>
+<p>Newman M E J. Random Graphs with Clustering[J]. Physical Review Letters,2009,103(5):58701.</p>
+
+        
+      </section>
+
+      <footer class="page__meta">
+        
+        
+
+
+        
+          <p class="page__date"><strong><i class="fa fa-fw fa-calendar" aria-hidden="true"></i> Updated:</strong> <time datetime="2015-12-19T00:00:00+00:00">December 19, 2015</time></p>
+        
+      </footer>
+
+      <section class="page__share">
+  
+    <h4 class="page__share-title">Share on</h4>
+  
+
+<!-- needsharebutton Javascript file -->
+<script src="/assets/js/needsharebutton.min.js"></script>
+<!-- needsharebutton CSS file -->
+<link href="/assets/css/needsharebutton.min.css" rel="stylesheet" />
+
+<button  class="btn btn-default need-share-button">Share</button>
+  <a href="https://twitter.com/intent/tweet?via=ChengJunWang&text=%E5%A4%8D%E6%9D%82%E7%BD%91%E7%BB%9C%E9%9B%B6%E6%A8%A1%E5%9E%8B%E6%9E%84%E9%80%A0%E7%9A%84%E6%96%B9%E6%B3%95%E5%8F%8A%E5%BA%94%E7%94%A8%20https%3A%2F%2Fsocrateslab.github.io%2Fforum%2Fnetwork-zero-model%2F" class="btn btn--twitter" title="Share on Twitter"><i class="fa fa-fw fa-twitter" aria-hidden="true"></i><span> Twitter</span></a>
+
+  <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fsocrateslab.github.io%2Fforum%2Fnetwork-zero-model%2F" class="btn btn--facebook" title="Share on Facebook"><i class="fa fa-fw fa-facebook" aria-hidden="true"></i><span> Facebook</span></a>
+
+  <a href="https://plus.google.com/share?url=https%3A%2F%2Fsocrateslab.github.io%2Fforum%2Fnetwork-zero-model%2F" class="btn btn--google-plus" title="Share on Google Plus"><i class="fa fa-fw fa-google-plus" aria-hidden="true"></i><span> Google+</span></a>
+
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fsocrateslab.github.io%2Fforum%2Fnetwork-zero-model%2F" class="btn btn--linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-linkedin" aria-hidden="true"></i><span> LinkedIn</span></a>
+</section>
+
+
+      
+  <nav class="pagination">
+    
+      <a href="https://socrateslab.github.io/forum/%E5%8F%AF%E8%A7%86%E5%8C%96/ldavis-intro/" class="pagination--pager" title="LDAvis——用R做中文LDA主题模型可视化分析
+">Previous</a>
+    
+    
+      <a href="https://socrateslab.github.io/forum/scaling-meaning/" class="pagination--pager" title="无标度的意义
+">Next</a>
+    
+  </nav>
+
+    </div>
+
+    
+      <div class="page__comments">
+  
+    
+        <h4 class="page__comments-title">Leave a Comment</h4>
+        <section id="disqus_thread">
+          <a href="#" onclick="disqus();return false;">Show Comments</a>
+        </section>
+      
+</div>
+
+    
+
+    
+  </article>
+
+
+  
+  
+    <div class="page__related">
+      <h4 class="page__related-title">You May Also Enjoy</h4>
+      <div class="grid__wrapper">
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/unsplash-gallery-image-2-th.jpg"
+          
+          alt="">
+      </div>
+    
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      <a href="/forum/douban-group/" rel="permalink">计算传播网迁移至豆瓣小组
+</a>
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">为了方便维护和更新，计算传播网正式迁移至豆瓣小组。链接为：https://www.douban.com/group/webmining/
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/unsplash-gallery-image-2-th.jpg"
+          
+          alt="">
+      </div>
+    
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      <a href="/forum/python/actual-entropy/" rel="permalink">思考真实熵
+</a>
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  3 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">在Limits of Predictability in Human Mobility一文（Song, 2010, Science）当中，Song等人提出人类移动行为的可预测性问题。强调了采用香农熵或随机熵不能捕捉到移动位置的时间序列特点，主张采用一种真实熵(the actual entropy)的测量方式，表示...</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/unsplash-gallery-image-3-th.jpg"
+          
+          alt="">
+      </div>
+    
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      <a href="/forum/cjcc-cfp/" rel="permalink">《中国网络传播研究》计算传播专刊2019征稿通知
+</a>
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  less than 1 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">‘《中国网络传播研究》计算传播专刊 的征文方向包括（但不限于）：计算社会科学、计算传播学、传播网络分析、新闻文本挖掘、传播计算方法、数据新闻、计算广告、新闻推荐系统等方面。截止时间为2019年11月1日’
+</p>
+  </article>
+</div>
+
+        
+          
+
+
+
+<div class="grid__item">
+  <article class="archive__item" itemscope itemtype="http://schema.org/CreativeWork">
+    
+      <div class="archive__item-teaser">
+        <img src=
+          
+            "/assets/images/500x300.png"
+          
+          alt="">
+      </div>
+    
+    
+    <h2 class="archive__item-title" itemprop="headline">
+      <a href="/forum/xgboost/" rel="permalink">Using XGBoost in Python
+</a>
+    </h2>
+    
+      <p class="page__meta"><i class="fa fa-clock-o" aria-hidden="true"></i> 
+
+
+
+
+  15 minute read
+</p>
+    
+    <p class="archive__item-excerpt" itemprop="description">XGBoost is one of the most popular machine learning algorithm these days. Regardless of the type of prediction task at hand; regression or classification.
+</p>
+  </article>
+</div>
+
+        
+      </div>
+    </div>
+  
+  
+</div>
+
+
+    <div class="page__footer">
+      <footer>
+        <!-- start custom footer snippets -->
+
+<!-- end custom footer snippets -->
+
+        <div class="page__footer-follow">
+  <ul class="social-icons">
+    
+      <li><strong>Follow:</strong></li>
+    
+    
+      <li><a href="https://twitter.com/ChengJunWang"><i class="fa fa-fw fa-twitter-square" aria-hidden="true"></i> Twitter</a></li>
+    
+    
+    
+    
+    
+    <li><a href="https://socrateslab.github.io/forum/feed.xml"><i class="fa fa-fw fa-rss-square" aria-hidden="true"></i> Feed</a></li>
+  </ul>
+</div>
+
+<div class="page__footer-copyright">&copy; 2021 计算传播网. Powered by <a href="http://jekyllrb.com" rel="nofollow">Jekyll</a> &amp; <a href="https://mademistakes.com/work/minimal-mistakes-jekyll-theme/" rel="nofollow">Minimal Mistakes</a>.</div>
+
+      </footer>
+    </div>
+
+    
+  <script src="/forum/assets/js/main.min.js"></script>
+
+
+
+
+  
+      <script type="text/javascript">
+// Replace labnol with your disqus shortname
+var disqus_shortname = 'computational-communication';
+// Put the permalink of your web page / blog post
+var disqus_url = "https://socrateslab.github.io/forum/network-zero-model/";
+// Put the permalink of your web page / blog post
+var disqus_identifier = "/network-zero-model";
+var disqus_loaded = false;
+// This is the function that will load Disqus comments on demand
+function disqus() {
+  if (!disqus_loaded)  {
+    // This is to ensure that Disqus widget is loaded only once
+    disqus_loaded = true;
+    var e = document.createElement("script");
+    e.type = "text/javascript";
+    e.async = true;
+    e.src = "//" + disqus_shortname + ".disqus.com/embed.js";
+    (document.getElementsByTagName("head")[0] ||
+     document.getElementsByTagName("body")[0])
+    .appendChild(e);
+  }
+}
+</script>
+<!--
+
+
+  <script type="text/javascript">
+  	/* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+  	var disqus_shortname = 'computational-communication';
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function() {
+  		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+  		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  	})();
+  	/* * * DON'T EDIT BELOW THIS LINE * * */
+  	(function () {
+  		var s = document.createElement('script'); s.async = true;
+  		s.type = 'text/javascript';
+  		s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  		(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+  	}());
+  </script>
+
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <script>
+    var disqus_config = function () {
+      this.page.url = "https://socrateslab.github.io/forum/network-zero-model/";  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = "/network-zero-model"; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://computational-communication.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+    })();
+  </script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+-->
+
+    
+
+
+
+  </body>
+</html>
